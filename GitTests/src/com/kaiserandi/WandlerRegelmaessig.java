@@ -1,19 +1,34 @@
 package com.kaiserandi;
 
+
 public class WandlerRegelmaessig implements IWandler {
 
+	public static String[] endungenListe = new String[]{"test", "st", "te", "tet", "t", "ten", "n", "nd"};
+	
 	@Override
 	public String infinitiv(String verb) {
-		if(verb.endsWith("ete")){
-			return verb.substring(0, verb.length() - 3) + "en";
-		}else if(verb.endsWith("st") || verb.endsWith("en") || verb.endsWith("te")){
-			return verb.substring(0, verb.length() - 2) + "en";
-		}else {
-			if(verb.startsWith("ge")){
-				return verb.substring(2, verb.length() - 1) + "en";
-			}else{
-				return verb.substring(0, verb.length() - 1) + "en";
+		for (String endung : endungenListe) {
+			if(verb.endsWith(endung)){
+				//endung entfernen
+				verb = verb.substring(0, verb.length()-endung.length());
+				//evtl. führendes "ge" entfernen
+				if(verb.startsWith("ge")){
+					verb  = verb.substring(2, verb.length());
+				}
+				break;
 			}
+		}
+		// ä durch a ersetzen?
+		verb = verb.replace('ä', 'a');
+		// bei endung auf ln nichts anhängen
+		if(verb.endsWith("ln")){
+			return verb;
+		}
+		// bei endung auf e, r nur n anhängen
+		else if(verb.endsWith("e") || verb.endsWith("r")){
+			return verb + "n";
+		}else{
+			return verb + "en";
 		}
 	}
 
