@@ -25,7 +25,7 @@ public class WandlerRegelmaessig implements IWandler {
 			return verb;
 		}
 		// bei endung auf e, r nur n anhängen
-		else if(verb.endsWith("e") || verb.endsWith("r")){
+		else if(verb.endsWith("e") || verb.endsWith("r")|| verb.endsWith("l")){
 			return verb + "n";
 		}else{
 			return verb + "en";
